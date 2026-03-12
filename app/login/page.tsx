@@ -2,6 +2,8 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
+import Image from "next/image"
+import Link from "next/link"
 import { supabase } from "@/lib/supabase"
 
 export default function LoginPage() {
@@ -26,45 +28,75 @@ export default function LoginPage() {
       return
     }
 
-    // ✅ IMPORTANT: force refresh so middleware sees new session
     router.push("/dashboard")
     router.refresh()
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <form
-        onSubmit={handleLogin}
-        className="bg-white p-8 rounded-xl shadow-md w-96"
-      >
-        <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+      <div className="bg-white shadow-lg rounded-2xl p-10 w-full max-w-md">
 
-        <input
-          type="email"
-          placeholder="Email"
-          className="w-full p-2 border rounded mb-4"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
+        {/* Logo */}
+        <div className="flex flex-col items-center mb-6">
+          <Image
+            src="/logo.png"
+            alt="Agripromax Logo"
+            width={80}
+            height={80}
+            className="mb-3"
+          />
 
-        <input
-          type="password"
-          placeholder="Password"
-          className="w-full p-2 border rounded mb-6"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+          <h1 className="text-2xl font-bold text-green-700">
+            Agripromax
+          </h1>
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full bg-green-600 text-white p-2 rounded hover:bg-green-700"
-        >
-          {loading ? "Logging in..." : "Login"}
-        </button>
-      </form>
+          <p className="text-gray-500 text-sm text-center">
+            Smart Agricultural Data & Advisory Platform
+          </p>
+        </div>
+
+        {/* Login Form */}
+        <form onSubmit={handleLogin}>
+
+          <input
+            type="email"
+            placeholder="Email address"
+            className="w-full p-3 border rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-green-600"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+
+          <input
+            type="password"
+            placeholder="Password"
+            className="w-full p-3 border rounded-lg mb-6 focus:outline-none focus:ring-2 focus:ring-green-600"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-green-600 text-white p-3 rounded-lg font-semibold hover:bg-green-700 transition"
+          >
+            {loading ? "Logging in..." : "Login"}
+          </button>
+        </form>
+
+        {/* Signup Link */}
+        <p className="text-center text-sm text-gray-500 mt-6">
+          Don't have an account?{" "}
+          <Link
+            href="/signup"
+            className="text-green-700 font-medium hover:underline"
+          >
+            Create one
+          </Link>
+        </p>
+
+      </div>
     </div>
   )
 }
