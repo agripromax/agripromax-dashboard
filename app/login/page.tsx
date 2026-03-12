@@ -3,7 +3,6 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
-import Link from "next/link"
 import { supabase } from "@/lib/supabase"
 
 export default function LoginPage() {
@@ -36,13 +35,13 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
       <div className="bg-white shadow-lg rounded-2xl p-10 w-full max-w-md">
 
-        {/* Logo */}
-        <div className="flex flex-col items-center mb-6">
+        {/* Logo + Branding */}
+        <div className="flex flex-col items-center mb-8">
           <Image
             src="/logo.png"
             alt="Agripromax Logo"
-            width={80}
-            height={80}
+            width={90}
+            height={90}
             className="mb-3"
           />
 
@@ -83,17 +82,12 @@ export default function LoginPage() {
           >
             {loading ? "Logging in..." : "Login"}
           </button>
+
         </form>
 
-        {/* Signup Link */}
-        <p className="text-center text-sm text-gray-500 mt-6">
-          Don't have an account?{" "}
-          <Link
-            href="/signup"
-            className="text-green-700 font-medium hover:underline"
-          >
-            Create one
-          </Link>
+        {/* Footer */}
+        <p className="text-center text-xs text-gray-400 mt-6">
+          © {new Date().getFullYear()} Agripromax
         </p>
 
       </div>
